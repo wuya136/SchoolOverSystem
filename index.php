@@ -30,7 +30,7 @@
 			密码：
 			<input type="password" name="password"/>
 			<br/>
-			<input type="radio" name="role" value="teacher"/>老师
+			<input type="radio" name="role" value="teacher" checked="checked"/>老师
 			<input type="radio" name="role" value="parent"/>家长
 			<br/>
 			<input type="submit" value="登陆"/>
