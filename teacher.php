@@ -5,7 +5,7 @@
 	</head>
 	<h1>
 <?php
-printf("%s\n", $TEACHER_NAME);
+printf("%s\n", $_SESSION['loginname']);
 ?>
 		老师，你好！
 	</h1>

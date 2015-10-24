@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+if (strcmp($_SESSION['role'], "teacher"))
+	$url = "http://localhost/SchoolOverSystem/teacher.php";
+else
+	$url = "http://localhost/SchoolOverSystem/parent.php";
+
+header("location:$url");
+
 /*
  * Connect the database
  */

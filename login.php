@@ -15,10 +15,13 @@ $mysqli->set_charset("utf8");
 /*
  * Discriminate the login role
  */
-if (strcmp($_POST["role"], "teacher") == 0)
+if (strcmp($_POST["role"], "teacher") == 0) {
 	$ROLE_TABLE_NAME = "teacher";
-else
+	$_SESSION['role'] = "teacher";
+} else {
 	$ROLE_TABLE_NAME = "parent";
+	$_SESSION['role'] = "parent";
+}
 
 /*
  * Create sql query statement
@@ -38,11 +41,13 @@ if ($result = $mysqli->query($query)) {
 			$TEACHER_ID = $obj->teacher_id;
 			$TEACHER_NAME = $obj->name;
 			$_SESSION['teacher_id'] = $TEACHER_ID;
+			$_SESSION['loginname'] = $TEACHER_NAME;
 			include "teacher.php";
 		} else {
 			$PARENT_ID = $obj->parent_id;
 			$PARENT_NAME = $obj->name;
 			$_SESSION['parent_id'] = $PARENT_ID;
+			$_SESSION['loginname'] = $PARENT_NAME;
 			include "parent.php";
 		}
 	} else {
