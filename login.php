@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 /*
  * Connect the database
  */
@@ -35,10 +37,12 @@ if ($result = $mysqli->query($query)) {
 		if (strcmp($_POST["role"], "teacher") == 0) {
 			$TEACHER_ID = $obj->teacher_id;
 			$TEACHER_NAME = $obj->name;
+			$_SESSION['teacher_id'] = $TEACHER_ID;
 			include "teacher.php";
 		} else {
 			$PARENT_ID = $obj->parent_id;
 			$PARENT_NAME = $obj->name;
+			$_SESSION['parent_id'] = $PARENT_ID;
 			include "parent.php";
 		}
 	} else {

@@ -12,6 +12,7 @@ $mysqli->set_charset("utf8");
 
 $CLASS_ID = $_POST['class'];
 $OVERTIME = $_POST['overtime'];
+$TEACHER_ID = $_SESSION['teacher_id'];
 $query = "select student_id from student where class_id='" . $CLASS_ID . "';";
 $insert = "";
 
