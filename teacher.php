@@ -16,7 +16,7 @@ printf("%s\n", $TEACHER_NAME);
 		班级：
 		<select name="class">
 <?php
-$query = "select name from class";
+$query = "select class_id,name from class";
 if ($result = $mysqli->query($query)) {
 	while ($obj = $result->fetch_object()) {
 		$CLASS_ID = $obj->class_id;
