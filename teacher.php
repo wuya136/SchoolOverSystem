@@ -44,12 +44,24 @@ $CLASS_ID = 5;
 $query = "select student_id, name from student where class_id='" . $CLASS_ID . "';";
 
 if ($result = $mysqli->query($query)) {
+	printf("<table>\n");
+	$count = 0;
 	while ($obj = $result->fetch_object()) {
+		if ($count % 5 == 0)
+			printf("<tr>\n");
+
 		$STUDENT_ID = $obj->student_id;
 		$STUDENT_NAME = $obj->name;
-		$htmlcode = "<input type='checkbox' name='student' value='" . $STUDENT_ID . "'/>" . $STUDENT_NAME . "<br/>";
+		$htmlcode = "<td>";
+		$htmlcode .= "<input type='checkbox' name='student' value='" . $STUDENT_ID . "'/>" . $STUDENT_NAME . "<br/>";
+		$htmlcode .= "</td>";
 		printf("%s\n", $htmlcode);
+
+		if ($count % 5 == 4)
+			printf("</tr>\n");
+
 	}
+	printf("</table>\n");
 }
 ?>
 		</form>
