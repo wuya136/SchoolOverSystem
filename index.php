@@ -49,7 +49,7 @@
 			<input type="text" name="name"/>
 			<br/>
 			密码：
-			<input type="text" name="password"/>
+			<input type="password" name="password"/>
 			<br/>
 			<input type="radio" name="role" value="teacher"/>老师
 			<input type="radio" name="role" value="parent"/>家长
