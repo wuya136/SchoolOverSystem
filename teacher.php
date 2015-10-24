@@ -12,7 +12,7 @@ printf("%s\n", $TEACHER_NAME);
 
 	<body>
 
-	<form name="students" action="teacher.php" method="post">
+	<form name="classes" action="teacher.php" method="post">
 		班级：
 		<select name="class">
 <?php
@@ -31,14 +31,14 @@ if ($result = $mysqli->query($query)) {
 		计划放学时间：
 		<input type="text" name="time" value="2015.10.24 17:44:34"/>
 
-		<input type="submit" name="放学"/>
+		<input type="submit" value="放学"/>
 	</form>
 
 	<fieldset>
 		<legend>
 			班级学生
 		</legend>
-		<form>
+		<form name="student" action="keep.php" method="post">
 <?php
 $CLASS_ID = 5;
 $query = "select student_id, name from student where class_id='" . $CLASS_ID . "';";
@@ -65,6 +65,9 @@ if ($result = $mysqli->query($query)) {
 	printf("</table>\n");
 }
 ?>
+
+			<br/>
+			<input type="submit" value="暂留"/>
 		</form>
 	</fieldset>
 	</body>
