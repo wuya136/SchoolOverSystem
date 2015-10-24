@@ -46,9 +46,9 @@ if ($result = $mysqli->query($query)) {
 		sleep(1);
 		include "index.php";
 	}
-	$result->close();
 
 }
 
+$result->close();
 $mysqli->close();
 ?>

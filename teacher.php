@@ -40,13 +40,14 @@ if ($result = $mysqli->query($query)) {
 		</legend>
 		<form>
 <?php
+$CLASS_ID = $_POST['class'];
 $query = "select student_id, name from students where class_id='" . $CLASS_ID . "';";
 
 if ($result = $mysqli->query($query)) {
 	while ($obj = $result->fetch_object()) {
 		$STUDENT_ID = $obj->student_id;
 		$STUDENT_NAME = $obj->name;
-		$htmlcode = "<input type='checkbox' name='student' value='" . $STUDENT_ID . "'/>" . $STUDENT_NAME . "<br/>;
+		$htmlcode = "<input type='checkbox' name='student' value='" . $STUDENT_ID . "'/>" . $STUDENT_NAME . "<br/>";
 		printf("%s\n", $htmlcode);
 	}
 }
