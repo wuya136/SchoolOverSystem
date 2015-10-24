@@ -18,17 +18,28 @@ if (strcmp($_POST["role"], "teacher") == 0)
 else
 	$ROLE_TABLE_NAME = "parent";
 
-
+/*
+ * Create sql query statement
+ */
 $COLUMS = " " . $ROLE_TABLE_NAME . "_id, name, password";
 $WHRE_CLAUS = " where name='" . $_POST["name"] . "' and " . "password='" . $_POST["password"] . "'";
 
 $query = "select" . $COLUMS . " from " . $ROLE_TABLE_NAME . $WHRE_CLAUS . ";";
 
+/*
+ * Authenticate the login and jump to the right action page
+ */
 if ($result = $mysqli->query($query)) {
 	if ($result->num_rows > 0) {
-		while ($obj = $result->fetch_object()) {
-			//printf("ID: %s\n", $obj->class_id);
-			printf("Name: %s\n", $obj->name);
+		$obj = $result->fetch_object();
+		if (strcmp($_POST["role"], "teacher") == 0) {
+			$TEACHER_ID = $obj->teacher_id;
+			$TEACHER_NAME = $obj->name;
+			include "teacher.php";
+		} else {
+			$PARENT_ID = $obj->parent_id;
+			$PARENT_NAME = $obj->name;
+			include "parent.php";
 		}
 	} else {
 		printf("您输入的用户名或密码错误，请重新输入\n");
