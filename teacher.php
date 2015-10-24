@@ -31,10 +31,28 @@ if ($result = $mysqli->query($query)) {
 		计划放学时间：
 		<input type="text" name="time" value="2015.10.24 17:44:34"/>
 
+		<input type="submit" name="放学"/>
 	</form>
-<?php
 
+	<fieldset>
+		<legend>
+			班级学生
+		</legend>
+		<form>
+<?php
+$query = "select student_id, name from students where class_id='" . $CLASS_ID . "';";
+
+if ($result = $mysqli->query($query)) {
+	while ($obj = $result->fetch_object()) {
+		$STUDENT_ID = $obj->student_id;
+		$STUDENT_NAME = $obj->name;
+		$htmlcode = "<input type='checkbox' name='student' value='" . $STUDENT_ID . "'/>" . $STUDENT_NAME . "<br/>;
+		printf("%s\n", $htmlcode);
+	}
+}
 ?>
+		</form>
+	</fieldset>
 	</body>
 
 </html>
