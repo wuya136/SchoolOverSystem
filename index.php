@@ -7,11 +7,26 @@
 		<?php
 			echo "Hello PHP!";
 
-			$link = mysql_connect("localhost", "root", "");
-			if ($link)
-				die("Could not connect:" . mysql_error());
-			echo "Connected Successfully";
-			mysql_close($link);
+			$mysqli = new mysqli("localhost", "root", "", "SchoolOverSystem");
+			if (mysqli_connect_errno()) {
+				printf("Connect failed %s\n", mysqli_connect_errno());
+				exit();
+			}
+
+			$query = "select * from class";
+
+			if ($result = $mysqli->query($query)) {
+				while ($finfo = $result->fetch_field()) {
+					$currentfield = $result->currentfield;
+
+					printf("Column: %d\n", $currentfield);
+					printf("ID: %d\n", $finfo->class_id);
+					printf("Name: %s\n", $finfo->name);
+				}
+				$result->close();
+			}
+
+			$mysqli->close();
 		?>
 	</body>
 </html>
