@@ -12,7 +12,7 @@ printf("%s\n", $TEACHER_NAME);
 
 	<body>
 
-	<form name="classes" action="teacher.php" method="post">
+	<form name="classes" action="gohome.php" method="post">
 		班级：
 		<select name="class">
 <?php
@@ -29,7 +29,7 @@ if ($result = $mysqli->query($query)) {
 		</select>
 
 		计划放学时间：
-		<input type="text" name="time" value="2015.10.24 17:44:34"/>
+		<input type="text" name="overtime" value="2015.10.24 17:44:34"/>
 
 		<input type="submit" value="放学"/>
 	</form>
@@ -38,10 +38,9 @@ if ($result = $mysqli->query($query)) {
 		<legend>
 			班级学生
 		</legend>
-		<form name="student" action="keep.php" method="post">
+		<form name="students_gohome" action="keep.php" method="post">
 <?php
-$CLASS_ID = 5;
-$query = "select student_id, name from student where class_id='" . $CLASS_ID . "';";
+$query = "select student_id from schoolover where status=1 and overtime>'2015-10-24 00:00:00' and overtime <'2015-10-24 23:59:59';";
 
 if ($result = $mysqli->query($query)) {
 	printf("<table>\n");
@@ -51,9 +50,15 @@ if ($result = $mysqli->query($query)) {
 			printf("<tr>\n");
 
 		$STUDENT_ID = $obj->student_id;
-		$STUDENT_NAME = $obj->name;
+
+		$query2 = "select name from student where sutdent_id=" . $STUDENT_ID . ";";
+		$result2 = $mysqli->query($query2);
+		$obj2 = $result2->fetch_object();
+		$STUDENT_NAME = $obj2->name;
+		$result2->close();
+
 		$htmlcode = "<td>";
-		$htmlcode .= "<input type='checkbox' name='student' value='" . $STUDENT_ID . "'/>" . $STUDENT_NAME . "<br/>";
+		$htmlcode .= "<input type='checkbox' name='student_gohome[]' id='student_gohome' value='" . $STUDENT_ID . "'/>" . $STUDENT_NAME . "<br/>";
 		$htmlcode .= "</td>";
 		printf("%s\n", $htmlcode);
 
@@ -70,6 +75,47 @@ if ($result = $mysqli->query($query)) {
 			<input type="submit" value="暂留"/>
 		</form>
 	</fieldset>
+
+	<fieldset>
+		<legend>
+			暂留学生
+		</legend>
+		<form name="students_keeped" action="gohome.php" method="post">
+<?php
+$query = "select student_id from schoolover where status=2 and overtime>'2015-10-24 00:00:00' and overtime <'2015-10-24 23:59:59';";
+
+if ($result = $mysqli->query($query)) {
+	printf("<table>\n");
+	$count = 0;
+	while ($obj = $result->fetch_object()) {
+		if ($count % 7 == 0)
+			printf("<tr>\n");
+
+		$STUDENT_ID = $obj->student_id;
+
+		$query2 = "select name from student where sutdent_id=" . $STUDENT_ID . ";";
+		$result2 = $mysqli->query($query2);
+		$obj2 = $result2->fetch_object();
+		$STUDENT_NAME = $obj2->name;
+		$result2->close();
+
+		$htmlcode = "<td>";
+		$htmlcode .= "<input type='checkbox' name='student_keeped[]' id='student_keeped' value='" . $STUDENT_ID . "'/>" . $STUDENT_NAME . "<br/>";
+		$htmlcode .= "</td>";
+		printf("%s\n", $htmlcode);
+
+		if ($count % 7 == 6)
+			printf("</tr>\n");
+		$count++;
+
+	}
+	printf("</table>\n");
+}
+?>
+
+			<br/>
+			<input type="submit" value="放学"/>
+		</form>
 	</body>
 
 </html>
