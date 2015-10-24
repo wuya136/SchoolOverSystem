@@ -8,6 +8,16 @@
 session_start();
 
 printf("%s\n", $_SESSION['loginname']);
+
+/*
+ * Connect the database
+ */
+$mysqli = new mysqli("localhost", "root", "", "school_over_system");
+if (mysqli_connect_errno()) {
+	printf("Connect failed %s\n", mysqli_connect_errno());
+	exit();
+}
+$mysqli->set_charset("utf8");
 ?>
 		老师，你好！
 	</h1>
@@ -113,6 +123,8 @@ if ($result = $mysqli->query($query)) {
 	}
 	printf("</table>\n");
 }
+
+$mysqli->close();
 ?>
 
 			<br/>
