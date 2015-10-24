@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (strcmp($_SESSION['role'], "teacher"))
+if (strcmp($_SESSION['role'], "teacher") == 0)
 	$url = "http://localhost/SchoolOverSystem/teacher.php";
 else
 	$url = "http://localhost/SchoolOverSystem/parent.php";
