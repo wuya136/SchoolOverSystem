@@ -7,21 +7,19 @@
 		<?php
 			echo "Hello PHP!";
 
-			$mysqli = new mysqli("localhost", "root", "", "SchoolOverSystem");
+			$mysqli = new mysqli("localhost", "root", "", "school_over_system");
 			if (mysqli_connect_errno()) {
 				printf("Connect failed %s\n", mysqli_connect_errno());
 				exit();
 			}
+			$mysqli->set_charset("utf8");
 
 			$query = "select * from class";
 
 			if ($result = $mysqli->query($query)) {
-				while ($finfo = $result->fetch_field()) {
-					$currentfield = $result->currentfield;
-
-					printf("Column: %d\n", $currentfield);
-					printf("ID: %d\n", $finfo->class_id);
-					printf("Name: %s\n", $finfo->name);
+				while ($obj = $result->fetch_object()) {
+					printf("ID: %s\n", $obj->class_id);
+					printf("Name: %s\n", $obj->name);
 				}
 				$result->close();
 			}
