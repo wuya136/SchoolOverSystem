@@ -5,6 +5,8 @@
 	</head>
 	<h1>
 <?php
+session_start();
+
 printf("%s\n", $_SESSION['loginname']);
 ?>
 		老师，你好！
