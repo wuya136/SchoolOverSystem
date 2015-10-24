@@ -31,11 +31,9 @@ if ($result = $mysqli->query($query)) {
 			printf("Name: %s\n", $obj->name);
 		}
 	} else {
-		$result->close();
-
 		printf("您输入的用户名或密码错误，请重新输入\n");
-		sleep(2);
-		include index.php
+		sleep(1);
+		include "index.php";
 	}
 	$result->close();
 
