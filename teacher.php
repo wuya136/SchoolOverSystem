@@ -40,8 +40,8 @@ if ($result = $mysqli->query($query)) {
 		</legend>
 		<form>
 <?php
-$CLASS_ID = $_POST['class'];
-$query = "select student_id, name from students where class_id='" . $CLASS_ID . "';";
+$CLASS_ID = 5;
+$query = "select student_id, name from student where class_id='" . $CLASS_ID . "';";
 
 if ($result = $mysqli->query($query)) {
 	while ($obj = $result->fetch_object()) {
