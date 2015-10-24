@@ -28,6 +28,8 @@ if ($result = $mysqli->query($query)) {
 ?>
 		</select>
 
+		计划放学时间：
+		<input type="text" name="time" value="2015.10.24 17:44:34"/>
 
 	</form>
 <?php
