@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * Connect the database
+ */
+$mysqli = new mysqli("localhost", "root", "", "school_over_system");
+if (mysqli_connect_errno()) {
+	printf("Connect failed %s\n", mysqli_connect_errno());
+	exit();
+}
+$mysqli->set_charset("utf8");
+
 $CLASS_ID = $_POST['class'];
 $OVERTIME = $_POST['overtime'];
 $query = "select student_id from student where class_id='" . $CLASS_ID . "';";
