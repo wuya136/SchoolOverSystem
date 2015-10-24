@@ -47,7 +47,7 @@ if ($result = $mysqli->query($query)) {
 	printf("<table>\n");
 	$count = 0;
 	while ($obj = $result->fetch_object()) {
-		if ($count % 5 == 0)
+		if ($count % 7 == 0)
 			printf("<tr>\n");
 
 		$STUDENT_ID = $obj->student_id;
@@ -57,8 +57,9 @@ if ($result = $mysqli->query($query)) {
 		$htmlcode .= "</td>";
 		printf("%s\n", $htmlcode);
 
-		if ($count % 5 == 4)
+		if ($count % 7 == 6)
 			printf("</tr>\n");
+		$count++;
 
 	}
 	printf("</table>\n");
