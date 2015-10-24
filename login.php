@@ -33,12 +33,12 @@ if ($result = $mysqli->query($query)) {
 	if ($result->num_rows > 0) {
 		$obj = $result->fetch_object();
 		if (strcmp($_POST["role"], "teacher") == 0) {
-			$TEACHER_ID = $obj->teacher_id;
-			$TEACHER_NAME = $obj->name;
+			global $TEACHER_ID = $obj->teacher_id;
+			global $TEACHER_NAME = $obj->name;
 			include "teacher.php";
 		} else {
-			$PARENT_ID = $obj->parent_id;
-			$PARENT_NAME = $obj->name;
+			global $PARENT_ID = $obj->parent_id;
+			global $PARENT_NAME = $obj->name;
 			include "parent.php";
 		}
 	} else {
