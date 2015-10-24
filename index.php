@@ -1,5 +1,7 @@
 <html>
-	<head>登陆</head>
+	<head>
+		<title>登陆</title>
+	</head>
 
 	<body>
 		<?php
