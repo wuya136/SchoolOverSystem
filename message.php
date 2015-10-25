@@ -63,6 +63,7 @@ if (isset($_POST['message_to_all'])) {
 	$author_id = $_SESSION['teacher_id'];
 	$createtime = date("Y-m-d H:i:s");
 
+	$STUDENT_ID = $_POST['keeped_student'];
 }
 
 

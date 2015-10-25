@@ -203,10 +203,21 @@ printf("%s\n", $htmlcode);
 			</br>
 
 			给
-			<select name="keeped_students">
-				<option value="1">张三</option>
-				<option value="2">李四</option>
-				<option value="3">王二麻子</option>
+			<select name="keeped_student">
+<?php
+	$start_time = substr($_SESSION['overtime'], 0, 10) . " 00:00:00";
+	$end_time = substr($_SESSION['overtime'], 0, 10) . " 23:59:59";
+	$query = "select student_id, student_name from schoolover where status=2 and overtime>'" . $start_time . "' and overtime<'" . $end_time . "' and class_id='" . $_SESSION['class'] . "';" ;
+	$htmlcode = "";
+if ($result = $mysqli_teacher->query($query)) {
+	while ($obj = $result->fetch_object()) {
+		$STUDENT_ID = $obj->student_id;
+		$STUDENT_NAME = $obj->name;
+		$htmlcode .= "<option value='" . $STUDENT_ID . "'>" . $STUDENT_NAME . "</option>";
+	}
+}
+printf("%s\n", $htmlcode);
+?>
 			</select>
 			家长的留言
 			</br>
