@@ -29,7 +29,7 @@ if ($result = $mysqli_gohome->query($query)) {
 	while ($obj = $result->fetch_object()) {
 
 		$STUDENT_ID = $obj->student_id;
-		$insert = "insert into schoolover (student_id, teacher_id, status, overtime) VALUES" . "($STUDENT_ID, $TEACHER_ID, 1," .  "\"$OVERTIME\"" . ");";
+		$insert = "insert into schoolover (student_id, class_id, teacher_id, status, overtime) VALUES" . "($STUDENT_ID, $CLASS_ID, $TEACHER_ID, 1," .  "\"$OVERTIME\"" . ");";
 
 		/*
 		 * Insert schoolover data into database
