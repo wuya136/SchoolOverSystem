@@ -47,7 +47,15 @@ if ($result = $mysqli_teacher->query($query)) {
 	</form>
 	<form name="time" action="gohome.php" method="post">
 		计划放学时间：
-		<input type="text" name="overtime" value="2015.10.24 17:44:34"/>
+<?php
+$htmlcode = "<input type='text' name='overtime' value='";
+if (isset($_SESSION['overtime']))
+	$htmlcode .= $_SESSION['overtime'];
+else
+	$htmlcode .= date("Y-m-d H:i:s");
+$htmlcode .= "/>";
+printf("%s\n", $htmlcode);
+?>
 
 		<input type="submit" value="放学"/>
 	</form>
