@@ -53,7 +53,7 @@ if (isset($_SESSION['overtime']))
 	$htmlcode .= $_SESSION['overtime'];
 else
 	$htmlcode .= date("Y-m-d H:i:s");
-$htmlcode .= "/>";
+$htmlcode .= "'/>";
 printf("%s\n", $htmlcode);
 ?>
 
