@@ -33,7 +33,10 @@ if ($result = $mysqli_teacher->query($query)) {
 	while ($obj = $result->fetch_object()) {
 		$CLASS_ID = $obj->class_id;
 		$CLASS_NAME = $obj->name;
-		$htmlcode = "<option value='" . $CLASS_ID . "'>" . $CLASS_NAME . "</option>";
+		$htmlcode = "<option value='" . $CLASS_ID . "'";
+		if ($_SESSION['class'] == $CLASS_ID)
+			$htmlcode .= " select='selected'";
+		$htmlcode = ">" . $CLASS_NAME . "</option>";
 		printf("%s\n", $htmlcode);
 	}
 }
