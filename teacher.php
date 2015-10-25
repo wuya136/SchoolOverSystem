@@ -266,8 +266,9 @@ printf("%s\n", $htmlcode);
 			家长的回复
 		</legend>
 		<form name="parent_reply" action="teacher.php" method="post">
-			<textarea rows="15" cols="80">所有家长的回复</textarea>
 <?php
+$htmlcode = "<textarea rows='15' cols='80'>";
+
 $query = "select author_id, content, createtime from message where type='2' and receiver_id='" . $_SESSION['teacher_id'] . "' and createtime>'" . $start_time . "' and createtime<'" . $end_time . "';" ;
 if ($result = $mysqli_teacher->query($query)) {
 	while ($obj = $result->fetch_object()) {
@@ -283,6 +284,7 @@ if ($result = $mysqli_teacher->query($query)) {
 		$htmlcode .= $STUDENT_NAME . "家长对我说 " . $createtime . ":\n" . $message . "\n";
 	}
 }
+$htmlcode .= "</textarea>";
 ?>
 			<input type="submit" value="更新"/>
 		</form>
