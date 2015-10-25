@@ -126,7 +126,7 @@ $htmlcode = "<textarea rows='15' cols='80'>";
 
 $start_time = substr(date("Y-m-d H:i:s"), 0, 10) . " 00:00:00";
 $end_time = substr(date("Y-m-d H:i:s"), 0, 10) . " 23:59:59";
-$query = "select author_id, content, createtime from message where type='2' and receiver_id='" . $_SESSION['parent_id'] . "' and createtime>'" . $start_time . "' and createtime<'" . $end_time . "';" ;
+$query = "select author_id, content, createtime from message where receiver_id='" . $_SESSION['parent_id'] . "' and createtime>'" . $start_time . "' and createtime<'" . $end_time . "';" ;
 if ($result = $mysqli_parent->query($query)) {
 	while ($obj = $result->fetch_object()) {
 		$TEACHER_ID = $obj->author_id;
