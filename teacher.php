@@ -182,9 +182,24 @@ $mysqli_teacher->close();
 			给家长的留言
 		</legend>
 		<form name="teacher_message" action="message.php" method="post">
-			<textarea rows="15" cols="80">这是给所有家长的留言</textarea>
+<?php
+$start_time = substr($_SESSION['overtime'], 0, 10) . " 00:00:00";
+$end_time = substr($_SESSION['overtime'], 0, 10) . " 23:59:59";
+$query = "select content, createtime from message where type='1' and author_id='" . $_SESSION['teacher_id'] . "' and createtime>'" . $start_time . "' and createtime<'" . $end_time . "';" ;
+
+$htmlcode = "<textarea rows='15' cols='80'>"
+if ($result = $mysqli_teacher->query($query)) {
+	while ($obj = $result->fetch_object()) {
+		$message = $obj->content;
+		$createtime = $obj->createtime;
+		$htmlcode .= "我" . " " . $createtime . ":</br>" . $message . "</br>";
+	}
+}
+$htmlcode .= "</textarea>";
+printf("%s\n", $htmlcode);
+?>
 			</br>
-			<input type="text" name="message_to_all" value=""/>
+			<input type="text" name="message_to_all"/>
 			<input type="submit" value="发送"/>
 			</br>
 
