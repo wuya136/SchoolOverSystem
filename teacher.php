@@ -12,12 +12,12 @@ printf("%s\n", $_SESSION['loginname']);
 /*
  * Connect the database
  */
-$mysqli = new mysqli("localhost", "root", "", "school_over_system");
+$mysqli_teacher = new mysqli("localhost", "root", "", "school_over_system");
 if (mysqli_connect_errno()) {
 	printf("Connect failed %s\n", mysqli_connect_errno());
 	exit();
 }
-$mysqli->set_charset("utf8");
+$mysqli_teacher->set_charset("utf8");
 ?>
 		老师，你好！
 	</h1>
@@ -29,7 +29,7 @@ $mysqli->set_charset("utf8");
 		<select name="class">
 <?php
 $query = "select class_id,name from class";
-if ($result = $mysqli->query($query)) {
+if ($result = $mysqli_teacher->query($query)) {
 	while ($obj = $result->fetch_object()) {
 		$CLASS_ID = $obj->class_id;
 		$CLASS_NAME = $obj->name;
@@ -54,7 +54,7 @@ if ($result = $mysqli->query($query)) {
 <?php
 $query = "select student_id from schoolover where status=1 and overtime>'2015-10-24 00:00:00' and overtime <'2015-10-24 23:59:59';";
 
-if ($result = $mysqli->query($query)) {
+if ($result = $mysqli_teacher->query($query)) {
 	printf("<table>\n");
 	$count = 0;
 	while ($obj = $result->fetch_object()) {
@@ -67,7 +67,7 @@ if ($result = $mysqli->query($query)) {
 		 * Query student info
 		 */
 		$query2 = "select name from student where student_id=" . $STUDENT_ID . ";";
-		$result2 = $mysqli->query($query2);
+		$result2 = $mysqli_teacher->query($query2);
 		$obj2 = $result2->fetch_object();
 		$STUDENT_NAME = $obj2->name;
 		$result2->close();
@@ -99,7 +99,7 @@ if ($result = $mysqli->query($query)) {
 <?php
 $query = "select student_id from schoolover where status=2 and overtime>'2015-10-24 00:00:00' and overtime <'2015-10-24 23:59:59';";
 
-if ($result = $mysqli->query($query)) {
+if ($result = $mysqli_teacher->query($query)) {
 	printf("<table>\n");
 	$count = 0;
 	while ($obj = $result->fetch_object()) {
@@ -109,7 +109,7 @@ if ($result = $mysqli->query($query)) {
 		$STUDENT_ID = $obj->student_id;
 
 		$query2 = "select name from student where sutdent_id=" . $STUDENT_ID . ";";
-		$result2 = $mysqli->query($query2);
+		$result2 = $mysqli_teacher->query($query2);
 		$obj2 = $result2->fetch_object();
 		$STUDENT_NAME = $obj2->name;
 		$result2->close();
@@ -127,7 +127,7 @@ if ($result = $mysqli->query($query)) {
 	printf("</table>\n");
 }
 
-$mysqli->close();
+$mysqli_teacher->close();
 ?>
 
 			<br/>
