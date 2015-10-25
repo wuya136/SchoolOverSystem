@@ -97,7 +97,7 @@ $htmlcode = "<textarea rows='15' cols='80'>";
 
 $start_time = substr(date("Y-m-d H:i:s"), 0, 10) . " 00:00:00";
 $end_time = substr(date("Y-m-d H:i:s"), 0, 10) . " 23:59:59";
-$query = "select content, createtime from message where type='1' and author_id='" . $_SESSION['parent_id'] . "' and createtime>'" . $start_time . "' and createtime<'" . $end_time . "';" ;
+$query = "select content, createtime from message where type='2' and author_id='" . $_SESSION['parent_id'] . "' and createtime>'" . $start_time . "' and createtime<'" . $end_time . "';" ;
 if ($result = $mysqli_parent->query($query)) {
 	while ($obj = $result->fetch_object()) {
 		$message = $obj->content;
