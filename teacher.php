@@ -170,6 +170,41 @@ $mysqli_teacher->close();
 			<input type="submit" value="放学"/>
 		</form>
 	</fieldset>
+
+	<fieldset>
+		<legend>
+			给家长的留言
+		</legend>
+		<form name="teacher_message" action="message.php" method="post">
+			<textarea rows="15" cols="80">这是给所有家长的留言</textarea>
+			</br>
+			<input type="text" name="message_to_all" value=""/>
+			<input type="submit" value="发送"/>
+			</br>
+
+			给
+			<select name="keeped_students">
+				<option value="1">张三</option>
+				<option value="2">李四</option>
+				<option value="3">王二麻子</option>
+			</select>
+			家长的留言
+			</br>
+			<input type="text" name="message_to_parent" value=""/>
+			<input type="submit" value="发送"/>
+		</form>
+	</fieldset>
+
+	<fieldset>
+		<legend>
+			家长的回复
+		</legend>
+		<form name="parent_reply" action="reply.php" method="post">
+			<textarea rows="15" cols="80">所有家长的回复</textarea>
+			<input type="submit" value="更新"/>
+		</form>
+	</fieldset>
+
 	</body>
 
 </html>
