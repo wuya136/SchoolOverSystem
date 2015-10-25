@@ -17,23 +17,22 @@ if (mysqli_connect_errno()) {
 }
 $mysqli_keep->set_charset("utf8");
 
-$STUDENT_GOHOME = $_POST['student_gohome'];
-$update = "";
+$STUDENT_GOHOME = array_values($_POST['student_gohome']);
 
 if (is_array($STUDENT_GOHOME)) {
 	foreach($STUDENT_GOHOME as $value) {
-		$update .= "update schoolover set status='2' where student_id="; 
+		$update = "update schoolover set status='2' where student_id=";
 		$update .= "$value" . ";";
+
+		/*
+		 * Update schoolover data from GoHome to Keep
+		 */
+		if ($mysqli_keep->query($update))
+			printf("Update schoolover table successfully\n");
+		else
+			printf("%s failed to execute\n" ,$update);
 	}
 }
-
-/*
- * Update schoolover data from GoHome to Keep
- */
-if ($mysqli_keep->query($update))
-	printf("Update schoolover table successfully\n");
-else
-	printf("%s failed to execute\n" ,$update);
 
 $mysqli_keep->commit();
 ?>
