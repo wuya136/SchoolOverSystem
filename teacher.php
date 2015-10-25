@@ -67,6 +67,8 @@ printf("%s\n", $htmlcode);
 		<input type="submit" value="放学"/>
 	</form>
 
+	</p>
+
 	<fieldset>
 		<legend>
 			班级学生
@@ -117,6 +119,8 @@ if ($result = $mysqli_teacher->query($query)) {
 			<input type="submit" value="暂留"/>
 		</form>
 	</fieldset>
+
+	</p>
 
 	<fieldset>
 		<legend>
@@ -171,6 +175,8 @@ $mysqli_teacher->close();
 		</form>
 	</fieldset>
 
+	</p>
+
 	<fieldset>
 		<legend>
 			给家长的留言
@@ -194,6 +200,8 @@ $mysqli_teacher->close();
 			<input type="submit" value="发送"/>
 		</form>
 	</fieldset>
+
+	</p>
 
 	<fieldset>
 		<legend>
