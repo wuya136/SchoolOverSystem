@@ -280,7 +280,7 @@ $htmlcode = "<textarea rows='15' cols='80'>";
 $query = "select author_id, content, createtime from message where type='2' and receiver_id='" . $_SESSION['teacher_id'] . "' and createtime>'" . $start_time . "' and createtime<'" . $end_time . "';" ;
 if ($result = $mysqli_teacher->query($query)) {
 	while ($obj = $result->fetch_object()) {
-		$PARENT_ID = $obj->receiver_id;
+		$PARENT_ID = $obj->author_id;
 		$message = $obj->content;
 		$createtime = $obj->createtime;
 
