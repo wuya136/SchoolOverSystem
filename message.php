@@ -95,7 +95,7 @@ if (isset($_POST['message_to_all']) && $_POST['message_to_all'] != NULL) {
 	$query = "select student_id from student where parent_id='" . $author_id . "';";
 	$result = $mysqli_message->query($query);
 	$obj = $result->fetch_object();
-	$STUDENT_ID = $obj->parent_id;
+	$STUDENT_ID = $obj->student_id;
 
 	$start_time = substr(date("Y-m-d H:i:s"), 0, 10) . " 00:00:00";
 	$end_time = substr(date("Y-m-d H:i:s"), 0, 10) . " 23:59:59";
