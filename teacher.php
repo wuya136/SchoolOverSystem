@@ -186,24 +186,29 @@ $start_time = substr($_SESSION['overtime'], 0, 10) . " 00:00:00";
 $end_time = substr($_SESSION['overtime'], 0, 10) . " 23:59:59";
 $query = "select receiver_id from message where type='1' and author_id='" . $_SESSION['teacher_id'] . "' and createtime>'" . $start_time . "' and createtime<'" . $end_time . "';" ;
 
+$htmlcode = "<textarea rows='15' cols='80'>";
+/*
+ *	老师对所有家长说
+ */
 if ($result = $mysqli_teacher->query($query)) {
 	if ($obj = $result->fetch_object()) {
 		$PARENT_ID = $obj->receiver_id;
+
+		$query = "select content, createtime from message where type='1' and author_id='" . $_SESSION['teacher_id'] . "' and createtime>'" . $start_time . "' and createtime<'" . $end_time . " and receiver_id='" . $PARENT_ID . "';" ;
+		if ($result = $mysqli_teacher->query($query)) {
+			while ($obj = $result->fetch_object()) {
+				$message = $obj->content;
+				$createtime = $obj->createtime;
+				$htmlcode .= "我对所有家长说 " . $createtime . ":\n" . $message . "\n";
+			}
+		}
 	}
 }
 $result->close();
 
-$htmlcode = "<textarea rows='15' cols='80'>";
-$query = "select content, createtime from message where type='1' and author_id='" . $_SESSION['teacher_id'] . "' and createtime>'" . $start_time . "' and createtime<'" . $end_time . " and receiver_id='" . $PARENT_ID . "';" ;
-if ($result = $mysqli_teacher->query($query)) {
-	while ($obj = $result->fetch_object()) {
-		$message = $obj->content;
-		$createtime = $obj->createtime;
-		$htmlcode .= "我对所有家长说 " . $createtime . ":\n" . $message . "\n";
-	}
-}
-$result->close();
-
+/*
+ *	老师对某一位家长说
+ */
 $query = "select schoolover_id, content, createtime from message where type='2' and author_id='" . $_SESSION['teacher_id'] . "' and createtime>'" . $start_time . "' and createtime<'" . $end_time . "';" ;
 if ($result = $mysqli_teacher->query($query)) {
 	while ($obj = $result->fetch_object()) {
