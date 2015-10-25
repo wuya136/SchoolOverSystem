@@ -167,7 +167,6 @@ if ($result = $mysqli_teacher->query($query)) {
 	printf("</table>\n");
 }
 
-$mysqli_teacher->close();
 ?>
 
 			<br/>
@@ -187,7 +186,7 @@ $start_time = substr($_SESSION['overtime'], 0, 10) . " 00:00:00";
 $end_time = substr($_SESSION['overtime'], 0, 10) . " 23:59:59";
 $query = "select content, createtime from message where type='1' and author_id='" . $_SESSION['teacher_id'] . "' and createtime>'" . $start_time . "' and createtime<'" . $end_time . "';" ;
 
-$htmlcode = "<textarea rows='15' cols='80'>"
+$htmlcode = "<textarea rows='15' cols='80'>";
 if ($result = $mysqli_teacher->query($query)) {
 	while ($obj = $result->fetch_object()) {
 		$message = $obj->content;

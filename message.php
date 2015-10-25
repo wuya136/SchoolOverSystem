@@ -34,7 +34,7 @@ if (isset($_POST['message_to_all'])) {
 	$author_id = $_SESSION['teacher_id'];
 	$createtime = date("Y-m-d H:i:s");
 
-	$query1 = "select student_id from student where class_id='" . $_SESSION['class'] "';";
+	$query1 = "select student_id from student where class_id='" . $_SESSION['class'] . "';";
 	if ($result1 = $mysqli_message->query($query1)) {
 		while ($obj1 = $result1->fetch_object()) {
 			$STUDENT_ID = $obj1->student_id;
@@ -46,7 +46,7 @@ if (isset($_POST['message_to_all'])) {
 			$obj2 = $result2->fetch_object();
 			$SCHOOLOVER_ID = $obj2->schoolover_id;
 
-			$insert = "insert into message (schoolover_id, author_type, author_id, content, type, createtime) VALUES" . "($SCHOOLOVER_ID, $author_type, $author_id, $message, $message_type, $createtime);";
+			$insert = "insert into message (schoolover_id, author_type, author_id, content, type, createtime) VALUES" . "($SCHOOLOVER_ID, $author_type, $author_id, \"$message\", $message_type, \"$createtime\");";
 			/*
 			 * Insert message into database
 			 */
