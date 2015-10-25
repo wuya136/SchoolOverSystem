@@ -70,12 +70,13 @@ printf("%s\n", $htmlcode);
 		</legend>
 		<form name="students_gohome" action="keep.php" method="post">
 <?php
-if (isset($_SESSION['class']))
+if (isset($_SESSION['class'])) {
 	$start_time = substr($_SESSION['overtime'], 0, 10) . " 00:00:00";
 	$end_time = substr($_SESSION['overtime'], 0, 10) . " 23:59:59";
 	$query = "select student_id from schoolover where status=1 and overtime>'" . $start_time . "' and overtime<'" . $end_time . "' and class_id='" . $_SESSION['class'] . "';" ;
-else
+} else {
 	$query = "";
+}
 
 if ($result = $mysqli_teacher->query($query)) {
 	printf("<table>\n");
@@ -120,12 +121,13 @@ if ($result = $mysqli_teacher->query($query)) {
 		</legend>
 		<form name="students_keeped" action="nokeep.php" method="post">
 <?php
-if (isset($_SESSION['class']))
+if (isset($_SESSION['class'])) {
 	$start_time = substr($_SESSION['overtime'], 0, 10) . " 00:00:00";
 	$end_time = substr($_SESSION['overtime'], 0, 10) . " 23:59:59";
 	$query = "select student_id from schoolover where status=2 and overtime>'" . $start_time . "' and overtime<'" . $end_time . "' and class_id='" . $_SESSION['class'] . "';" ;
-else
+} else {
 	$query = "";
+}
 
 if ($result = $mysqli_teacher->query($query)) {
 	printf("<table>\n");
