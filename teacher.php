@@ -34,9 +34,9 @@ if ($result = $mysqli_teacher->query($query)) {
 		$CLASS_ID = $obj->class_id;
 		$CLASS_NAME = $obj->name;
 		$htmlcode = "<option value='" . $CLASS_ID . "'";
-		if ($_SESSION['class'] == $CLASS_ID)
-			$htmlcode .= " select='selected'";
-		$htmlcode = ">" . $CLASS_NAME . "</option>";
+		if (isset($_SESSION['class']) && $_SESSION['class'] == $CLASS_ID)
+			$htmlcode .= " selected='selected'";
+		$htmlcode .= ">" . $CLASS_NAME . "</option>";
 		printf("%s\n", $htmlcode);
 	}
 }
