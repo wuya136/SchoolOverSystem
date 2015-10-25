@@ -37,11 +37,11 @@ if ($result = $mysqli_login->query($query)) {
 	if ($result->num_rows > 0) {
 		$obj = $result->fetch_object();
 		if ($obj->role == 2) {
-			$_SESSION['teacher_id'] = $obj->login_id
+			$_SESSION['teacher_id'] = $obj->login_id;
 			$_SESSION['loginname'] = $obj->name;
 			include "teacher.php";
-		} else if ($obj->role == 1)i {
-			$_SESSION['parent_id'] = $obj->login_id
+		} else if ($obj->role == 1) {
+			$_SESSION['parent_id'] = $obj->login_id;
 			$_SESSION['loginname'] = $obj->name;
 			include "parent.php";
 		} else {
