@@ -56,9 +56,9 @@ if (isset($_POST['message_to_all']) && $_POST['message_to_all'] != NULL) {
 				printf("%s failed to execute\n" ,$insert);
 		}
 	}
-} else if (isset($_POST['message_to_parent']) &&_POST['message_to_parent'] != NULL) {
+} else if (isset($_POST['message_to_parent']) && $_POST['message_to_parent'] != NULL) {
 	$message = $_POST['message_to_parent'];
-	$messsage_type = 2;
+	$message_type = 2;
 	$author_type = 1;
 	$author_id = $_SESSION['teacher_id'];
 	$createtime = date("Y-m-d H:i:s");
@@ -68,7 +68,7 @@ if (isset($_POST['message_to_all']) && $_POST['message_to_all'] != NULL) {
 	$end_time = substr($_SESSION['overtime'], 0, 10) . " 23:59:59";
 	$query = "select schoolover_id from schoolover where student_id='" . $STUDENT_ID . "' and overtime>'" . $start_time . "' and overtime<'" . $end_time . "';" ;
 	$result = $mysqli_message->query($query);
-	$obj = $result2->fetch_object();
+	$obj = $result->fetch_object();
 	$SCHOOLOVER_ID = $obj->schoolover_id;
 
 	$insert = "insert into message (schoolover_id, author_type, author_id, content, type, createtime) VALUES" . "($SCHOOLOVER_ID, $author_type, $author_id, \"$message\", $message_type, \"$createtime\");";
