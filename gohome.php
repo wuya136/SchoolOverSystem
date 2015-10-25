@@ -11,12 +11,7 @@ header("location:$url");
 /*
  * Connect the database
  */
-$mysqli = new mysqli("localhost", "root", "", "school_over_system");
-if (mysqli_connect_errno()) {
-	printf("Connect failed %s\n", mysqli_connect_errno());
-	exit();
-}
-$mysqli->set_charset("utf8");
+$mysqli = $_SESSION['mysqli'];
 
 $CLASS_ID = $_POST['class'];
 $OVERTIME = $_POST['overtime'];

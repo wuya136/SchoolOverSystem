@@ -7,6 +7,8 @@
 <?php
 session_start();
 
+$mysqli = $_SESSION['mysqli'];
+
 printf("%s\n", $_SESSION['loginname']);
 ?>
 		老师，你好！

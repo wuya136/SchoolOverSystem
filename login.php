@@ -12,6 +12,8 @@ if (mysqli_connect_errno()) {
 }
 $mysqli->set_charset("utf8");
 
+$_SESSION['mysqli'] = $mysqli;
+
 /*
  * Discriminate the login role
  */
