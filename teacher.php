@@ -222,7 +222,6 @@ if ($result = $mysqli_teacher->query($query)) {
 		$obj2 = $result2->fetch_object();
 		$STUDENT_NAME = $obj2->name;
 		$result2->close();
-		$STUDENT_NAME = $obj->name;
 
 		$htmlcode .= "<option value='" . $STUDENT_ID . "'>" . $STUDENT_NAME . "</option>";
 	}
