@@ -108,7 +108,7 @@ if ($result = $mysqli_teacher->query($query)) {
 
 		$STUDENT_ID = $obj->student_id;
 
-		$query2 = "select name from student where sutdent_id=" . $STUDENT_ID . ";";
+		$query2 = "select name from student where student_id=" . $STUDENT_ID . ";";
 		$result2 = $mysqli_teacher->query($query2);
 		$obj2 = $result2->fetch_object();
 		$STUDENT_NAME = $obj2->name;
