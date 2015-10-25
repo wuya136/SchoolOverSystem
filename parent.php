@@ -110,12 +110,11 @@ $htmlcode .= "</textarea>";
 printf("%s\n", $htmlcode);
 ?>
 		</form>
-
-		</br>
 		<input type="text" name="message_to_teacher"/>
 		<input type="submit" value="发送"/>
-		</br>
 	</fieldset>
+
+	<p>
 
 	<fieldset>
 		<legend>
