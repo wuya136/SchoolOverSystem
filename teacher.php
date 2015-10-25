@@ -52,6 +52,9 @@ if ($result = $mysqli_teacher->query($query)) {
 	<form name="time" action="gohome.php" method="post">
 		计划放学时间：
 <?php
+/*
+ * Students overschool
+ */
 $htmlcode = "<input type='text' name='overtime' value='";
 if (isset($_SESSION['overtime']))
 	$htmlcode .= $_SESSION['overtime'];
@@ -121,6 +124,9 @@ if ($result = $mysqli_teacher->query($query)) {
 		</legend>
 		<form name="students_keeped" action="nokeep.php" method="post">
 <?php
+/*
+ * Students keeped
+ */
 if (isset($_SESSION['class'])) {
 	$start_time = substr($_SESSION['overtime'], 0, 10) . " 00:00:00";
 	$end_time = substr($_SESSION['overtime'], 0, 10) . " 23:59:59";
@@ -163,6 +169,7 @@ $mysqli_teacher->close();
 			<br/>
 			<input type="submit" value="放学"/>
 		</form>
+	</fieldset>
 	</body>
 
 </html>
