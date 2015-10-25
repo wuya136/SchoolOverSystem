@@ -194,13 +194,14 @@ if ($result = $mysqli_teacher->query($query)) {
 	if ($obj = $result->fetch_object()) {
 		$PARENT_ID = $obj->receiver_id;
 
-		$query = "select content, createtime from message where type='1' and author_id='" . $_SESSION['teacher_id'] . "' and createtime>'" . $start_time . "' and createtime<'" . $end_time . " and receiver_id='" . $PARENT_ID . "';" ;
-		if ($result = $mysqli_teacher->query($query)) {
-			while ($obj = $result->fetch_object()) {
-				$message = $obj->content;
-				$createtime = $obj->createtime;
+		$query1 = "select content, createtime from message where type='1' and author_id='" . $_SESSION['teacher_id'] . "' and createtime>'" . $start_time . "' and createtime<'" . $end_time . " and receiver_id='" . $PARENT_ID . "';" ;
+		if ($result1 = $mysqli_teacher->query($query1)) {
+			while ($obj1 = $result1->fetch_object()) {
+				$message = $obj1->content;
+				$createtime = $obj1->createtime;
 				$htmlcode .= "我对所有家长说 " . $createtime . ":\n" . $message . "\n";
 			}
+			$result1->close();
 		}
 	}
 	$result->close();
