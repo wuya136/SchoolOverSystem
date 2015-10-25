@@ -1,11 +1,7 @@
 <?php
 session_start();
 
-if (strcmp($_SESSION['role'], "teacher") == 0)
-	$url = "http://localhost/SchoolOverSystem/teacher.php";
-else
-	$url = "http://localhost/SchoolOverSystem/parent.php";
-
+$url = "http://localhost/SchoolOverSystem/teacher.php";
 header("location:$url");
 
 /*
@@ -18,8 +14,7 @@ if (mysqli_connect_errno()) {
 }
 $mysqli_gohome->set_charset("utf8");
 
-$CLASS_ID = $_POST['class'];
-$_SESSION['class'] = $CLASS_ID;
+$CLASS_ID = $_SESSION['class'];
 $OVERTIME = $_POST['overtime'];
 $TEACHER_ID = $_SESSION['teacher_id'];
 $query = "select student_id from student where class_id='" . $CLASS_ID . "';";

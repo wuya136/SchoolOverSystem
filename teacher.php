@@ -24,7 +24,7 @@ $mysqli_teacher->set_charset("utf8");
 
 	<body>
 
-	<form name="classes" action="gohome.php" method="post">
+	<form name="classes" action="selectclass.php" method="post">
 		班级：
 		<select name="class">
 <?php
@@ -42,7 +42,10 @@ if ($result = $mysqli_teacher->query($query)) {
 }
 ?>
 		</select>
+		<input type="submit" value="选择班级"/>
 
+	</form>
+	<form name="time" action="gohome.php" method="post">
 		计划放学时间：
 		<input type="text" name="overtime" value="2015.10.24 17:44:34"/>
 
