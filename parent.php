@@ -29,6 +29,7 @@ $mysqli_parent->set_charset("utf8");
 	<body>
 <?php
 $PARENT_ID = $_SESSION['parent_id'];
+$STATUS = -1;
 
 $htmlcode = "<h3>您孩子的班级：";
 $query = "select student_id, class_id from student where parent_id='" . $PARENT_ID . "';";
@@ -67,7 +68,6 @@ $htmlcode .= "</h3>";
 printf("%s\n", $htmlcode);
 
 $htmlcode = "<h3>您孩子的放学情况：";
-$STATUS = -1;
 
 if ($STATUS == 1)
 	$htmlcode .= "已放学";
