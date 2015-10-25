@@ -21,7 +21,7 @@ $STUDENT_KEEPED = array_values($_POST['student_keeped']);
 
 if (is_array($STUDENT_KEEPED)) {
 	foreach($STUDENT_KEEPED as $value) {
-		$update = "update schoolover set status='2' where student_id=";
+		$update = "update schoolover set status='1' where student_id=";
 		$update .= "$value" . ";";
 
 		/*
