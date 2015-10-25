@@ -55,7 +55,10 @@ if ($result = $mysqli_teacher->query($query)) {
 		</legend>
 		<form name="students_gohome" action="keep.php" method="post">
 <?php
-$query = "select student_id from schoolover where status=1 and overtime>'2015-10-24 00:00:00' and overtime <'2015-10-24 23:59:59' and class_id='" . $CLASS_ID . "';" ;
+if (isset($_SESSION['class']))
+	$query = "select student_id from schoolover where status=1 and overtime>'2015-10-24 00:00:00' and overtime <'2015-10-24 23:59:59' and class_id='" . $_SESSION['class'] . "';" ;
+else
+	$query = "";
 
 if ($result = $mysqli_teacher->query($query)) {
 	printf("<table>\n");
@@ -100,7 +103,10 @@ if ($result = $mysqli_teacher->query($query)) {
 		</legend>
 		<form name="students_keeped" action="nokeep.php" method="post">
 <?php
-$query = "select student_id from schoolover where status=2 and overtime>'2015-10-24 00:00:00' and overtime <'2015-10-24 23:59:59' and class_id='" . $CLASS_ID . "';";
+if (isset($_SESSION['class']))
+	$query = "select student_id from schoolover where status=2 and overtime>'2015-10-24 00:00:00' and overtime <'2015-10-24 23:59:59' and class_id='" . $_SESSION['class'] . "';" ;
+else
+	$query = "";
 
 if ($result = $mysqli_teacher->query($query)) {
 	printf("<table>\n");
