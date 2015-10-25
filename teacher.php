@@ -194,6 +194,17 @@ if ($result = $mysqli_teacher->query($query)) {
 		$htmlcode .= "我" . " " . $createtime . ":\n" . $message . "\n";
 	}
 }
+$result->close();
+
+$query = "select content, createtime from message where type='2' and author_id='" . $_SESSION['teacher_id'] . "' and createtime>'" . $start_time . "' and createtime<'" . $end_time . "';" ;
+if ($result = $mysqli_teacher->query($query)) {
+	while ($obj = $result->fetch_object()) {
+		$message = $obj->content;
+		$createtime = $obj->createtime;
+		$htmlcode .= "我" . " " . $createtime . ":\n" . $message . "\n";
+	}
+}
+
 $htmlcode .= "</textarea>";
 printf("%s\n", $htmlcode);
 ?>
