@@ -191,17 +191,29 @@ if ($result = $mysqli_teacher->query($query)) {
 	if ($obj = $result->fetch_object()) {
 		$message = $obj->content;
 		$createtime = $obj->createtime;
-		$htmlcode .= "我" . " " . $createtime . ":\n" . $message . "\n";
+		$htmlcode .= "我对所有家长说 " . $createtime . ":\n" . $message . "\n";
 	}
 }
 $result->close();
 
-$query = "select content, createtime from message where type='2' and author_id='" . $_SESSION['teacher_id'] . "' and createtime>'" . $start_time . "' and createtime<'" . $end_time . "';" ;
+$query = "select schoolover_id, content, createtime from message where type='2' and author_id='" . $_SESSION['teacher_id'] . "' and createtime>'" . $start_time . "' and createtime<'" . $end_time . "';" ;
 if ($result = $mysqli_teacher->query($query)) {
 	while ($obj = $result->fetch_object()) {
+		$SCHOOLOVER_ID = $obj->schoolover_id;
 		$message = $obj->content;
 		$createtime = $obj->createtime;
-		$htmlcode .= "我" . " " . $createtime . ":\n" . $message . "\n";
+
+		$query2 = "select student_id from schoolover where schoolover_id='" . $SCHOOLOVER_ID . "';";
+		$result2 = $mysqli_teacher->query($query2);
+		if ($obj2 = $result2->fetch_object()) {
+			$STUDENT_ID = $obj2->student_id;
+
+			$query3 = "select name from student where student_id='" . $STUDENT_ID . "';";
+			$result3 = $mysqli_teacher->query($query3);
+			if ($obj3 = $result3->fetch_object())
+				$STUDENT_NAME = $obj3->name;
+		}
+		$htmlcode .= "我对" . $STUDENT_NAME . "家长说 " . $createtime . ":\n" . $message . "\n";
 	}
 }
 
