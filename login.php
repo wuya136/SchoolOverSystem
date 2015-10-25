@@ -5,12 +5,12 @@ session_start();
 /*
  * Connect the database
  */
-$mysqli = new mysqli("localhost", "root", "", "school_over_system");
+$mysqli_login = new mysqli("localhost", "root", "", "school_over_system");
 if (mysqli_connect_errno()) {
 	printf("Connect failed %s\n", mysqli_connect_errno());
 	exit();
 }
-$mysqli->set_charset("utf8");
+$mysqli_login->set_charset("utf8");
 
 /*
  * Discriminate the login role
@@ -34,7 +34,7 @@ $query = "select" . $COLUMS . " from " . $ROLE_TABLE_NAME . $WHRE_CLAUS . ";";
 /*
  * Authenticate the login and jump to the right action page
  */
-if ($result = $mysqli->query($query)) {
+if ($result = $mysqli_login->query($query)) {
 	if ($result->num_rows > 0) {
 		$obj = $result->fetch_object();
 		if (strcmp($_POST["role"], "teacher") == 0) {
@@ -59,5 +59,5 @@ if ($result = $mysqli->query($query)) {
 }
 
 $result->close();
-$mysqli->close();
+$mysqli_login->close();
 ?>

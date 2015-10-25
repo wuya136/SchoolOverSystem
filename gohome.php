@@ -11,12 +11,12 @@ header("location:$url");
 /*
  * Connect the database
  */
-$mysqli = new mysqli("localhost", "root", "", "school_over_system");
+$mysqli_gohome = new mysqli("localhost", "root", "", "school_over_system");
 if (mysqli_connect_errno()) {
 	printf("Connect failed %s\n", mysqli_connect_errno());
 	exit();
 }
-$mysqli->set_charset("utf8");
+$mysqli_gohome->set_charset("utf8");
 
 $CLASS_ID = $_POST['class'];
 $OVERTIME = $_POST['overtime'];
@@ -24,7 +24,7 @@ $TEACHER_ID = $_SESSION['teacher_id'];
 $query = "select student_id from student where class_id='" . $CLASS_ID . "';";
 $insert = "";
 
-if ($result = $mysqli->query($query)) {
+if ($result = $mysqli_gohome->query($query)) {
 	while ($obj = $result->fetch_object()) {
 
 		$STUDENT_ID = $obj->student_id;
@@ -33,7 +33,7 @@ if ($result = $mysqli->query($query)) {
 		/*
 		 * Insert schoolover data into database
 		 */
-		if ($mysqli->query($insert))
+		if ($mysqli_gohome->query($insert))
 			printf("Update schoolover table successfully\n");
 		else
 			printf("%s failed to execute\n" ,$insert);
@@ -41,6 +41,6 @@ if ($result = $mysqli->query($query)) {
 }
 $result->close();
 
-$mysqli->commit();
+$mysqli_gohome->commit();
 
 ?>
