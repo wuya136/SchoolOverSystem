@@ -87,5 +87,67 @@ printf("%s\n", $htmlcode);
 ?>
 
 
+	<fieldset>
+		<legend>
+			您给老师的留言
+		</legend>
+		<form name="parent_message" action="message.php" method="post">
+<?php
+$htmlcode = "<textarea rows='15' cols='80'>";
+
+$start_time = substr(date("Y-m-d H:i:s"), 0, 10) . " 00:00:00";
+$end_time = substr(date("Y-m-d H:i:s"), 0, 10) . " 23:59:59";
+$query = "select content, createtime from message where type='1' and author_id='" . $_SESSION['parent_id'] . "' and createtime>'" . $start_time . "' and createtime<'" . $end_time . "';" ;
+if ($result = $mysqli_parent->query($query)) {
+	while ($obj = $result->fetch_object()) {
+		$message = $obj->content;
+		$createtime = $obj->createtime;
+		$htmlcode .= "我对朱琴老师说 " . $createtime . ":\n" . $message . "\n";
+	}
+	$result->close();
+}
+$htmlcode .= "</textarea>";
+printf("%s\n", $htmlcode);
+		</form>
+
+		</br>
+		<input type="text" name="message_to_teacher"/>
+		<input type="submit" value="发送"/>
+		</br>
+	</fieldset>
+
+	<fieldset>
+		<legend>
+			老师给您的留言
+		</legend>
+		<form name="teacher_reply" action="parent.php" method="post">
+<?php
+$htmlcode = "<textarea rows='15' cols='80'>";
+
+$start_time = substr(date("Y-m-d H:i:s"), 0, 10) . " 00:00:00";
+$end_time = substr(date("Y-m-d H:i:s"), 0, 10) . " 23:59:59";
+$query = "select author_id, content, createtime from message where type='2' and receiver_id='" . $_SESSION['parent_id'] . "' and createtime>'" . $start_time . "' and createtime<'" . $end_time . "';" ;
+if ($result = $mysqli_parent->query($query)) {
+	while ($obj = $result->fetch_object()) {
+		$TEACHER_ID = $obj->author_id;
+		$message = $obj->content;
+		$createtime = $obj->createtime;
+
+		$query2 = "select name from logins where login_id='" . $TEACHER_ID . "';";
+		$result2 = $mysqli_parent->query($query2);
+		if ($obj2 = $result2->fetch_object())
+			$TEACHER_NAME = $obj2->name;
+
+		$htmlcode .= $TEACHER_NAME . "老师对我说 " . $createtime . ":\n" . $message . "\n";
+	}
+}
+$htmlcode .= "</textarea>";
+
+printf("%s\n", $htmlcode);
+?>
+			<input type="submit" value="更新"/>
+		</form>
+	</fieldset>
+
 	</body>
 </html>
