@@ -17,20 +17,18 @@ $mysqli_login->set_charset("utf8");
  * Discriminate the login role
  */
 if (strcmp($_POST["role"], "teacher") == 0) {
-	$ROLE_TABLE_NAME = "teacher";
 	$_SESSION['role'] = "teacher";
 } else {
-	$ROLE_TABLE_NAME = "parent";
 	$_SESSION['role'] = "parent";
 }
 
 /*
  * Create sql query statement
  */
-$COLUMS = " " . $ROLE_TABLE_NAME . "_id, name, password";
+$COLUMS = " " . "login_id, name, password";
 $WHRE_CLAUS = " where name='" . $_POST["name"] . "' and " . "password='" . $_POST["password"] . "'";
 
-$query = "select" . $COLUMS . " from " . $ROLE_TABLE_NAME . $WHRE_CLAUS . ";";
+$query = "select" . $COLUMS . " from logins" . $WHRE_CLAUS . ";";
 
 /*
  * Authenticate the login and jump to the right action page
@@ -39,13 +37,13 @@ if ($result = $mysqli_login->query($query)) {
 	if ($result->num_rows > 0) {
 		$obj = $result->fetch_object();
 		if (strcmp($_POST["role"], "teacher") == 0) {
-			$TEACHER_ID = $obj->teacher_id;
+			$TEACHER_ID = $obj->login_id;
 			$TEACHER_NAME = $obj->name;
 			$_SESSION['teacher_id'] = $TEACHER_ID;
 			$_SESSION['loginname'] = $TEACHER_NAME;
 			include "teacher.php";
 		} else {
-			$PARENT_ID = $obj->parent_id;
+			$PARENT_ID = $obj->login_id;
 			$PARENT_NAME = $obj->name;
 			$_SESSION['parent_id'] = $PARENT_ID;
 			$_SESSION['loginname'] = $PARENT_NAME;
