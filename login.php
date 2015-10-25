@@ -58,6 +58,5 @@ if ($result = $mysqli_login->query($query)) {
 
 }
 
-$result->close();
 $mysqli_login->close();
 ?>
