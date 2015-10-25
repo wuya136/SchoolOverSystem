@@ -27,7 +27,7 @@ $mysqli_message->set_charset("utf8");
 /*
  * Discriminate the message direction
  */
-if (isset($_POST['message_to_all'])) {
+if (isset($_POST['message_to_all']) && $_POST['message_to_all'] != NULL) {
 	$message = $_POST['message_to_all'];
 	$message_type = 1;
 	$author_type = 1;
@@ -56,7 +56,7 @@ if (isset($_POST['message_to_all'])) {
 				printf("%s failed to execute\n" ,$insert);
 		}
 	}
-} else if (isset($_POST['message_to_parent'])) {
+} else if (isset($_POST['message_to_parent']) &&_POST['message_to_parent'] != NULL) {
 	$message = $_POST['message_to_parent'];
 	$messsage_type = 2;
 	$author_type = 1;

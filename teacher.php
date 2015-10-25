@@ -231,7 +231,7 @@ printf("%s\n", $htmlcode);
 			</select>
 			家长的留言
 			</br>
-			<input type="text" name="message_to_parent" value=""/>
+			<input type="text" name="message_to_parent"/>
 			<input type="submit" value="发送"/>
 		</form>
 	</fieldset>
