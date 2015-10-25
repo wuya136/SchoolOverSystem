@@ -95,7 +95,7 @@ if ($result = $mysqli_teacher->query($query)) {
 		<legend>
 			暂留学生
 		</legend>
-		<form name="students_keeped" action="gohome.php" method="post">
+		<form name="students_keeped" action="nokeep.php" method="post">
 <?php
 $query = "select student_id from schoolover where status=2 and overtime>'2015-10-24 00:00:00' and overtime <'2015-10-24 23:59:59';";
 
