@@ -285,6 +285,8 @@ if ($result = $mysqli_teacher->query($query)) {
 	}
 }
 $htmlcode .= "</textarea>";
+
+printf("%s\n", htmlcode);
 ?>
 			<input type="submit" value="更新"/>
 		</form>
