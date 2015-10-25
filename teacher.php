@@ -188,11 +188,10 @@ $query = "select content, createtime from message where type='1' and author_id='
 
 $htmlcode = "<textarea rows='15' cols='80'>";
 if ($result = $mysqli_teacher->query($query)) {
-	while ($obj = $result->fetch_object()) {
-		$message = $obj->content;
-		$createtime = $obj->createtime;
-		$htmlcode .= "我" . " " . $createtime . ":\n" . $message . "\n";
-	}
+	$obj = $result->fetch_object();
+	$message = $obj->content;
+	$createtime = $obj->createtime;
+	$htmlcode .= "我" . " " . $createtime . ":\n" . $message . "\n";
 }
 $htmlcode .= "</textarea>";
 printf("%s\n", $htmlcode);
