@@ -203,8 +203,8 @@ if ($result = $mysqli_teacher->query($query)) {
 			}
 		}
 	}
+	$result->close();
 }
-$result->close();
 
 /*
  *	老师对某一位家长说
