@@ -108,6 +108,7 @@ if ($result = $mysqli_parent->query($query)) {
 }
 $htmlcode .= "</textarea>";
 printf("%s\n", $htmlcode);
+?>
 		</form>
 
 		</br>
