@@ -25,7 +25,7 @@ if (strcmp($_POST["role"], "teacher") == 0) {
 /*
  * Create sql query statement
  */
-$COLUMS = " " . "login_id, name, password";
+$COLUMS = " " . "login_id, name, password, role";
 $WHRE_CLAUS = " where name='" . $_POST["name"] . "' and " . "password='" . $_POST["password"] . "'";
 
 $query = "select" . $COLUMS . " from logins" . $WHRE_CLAUS . ";";
@@ -36,19 +36,20 @@ $query = "select" . $COLUMS . " from logins" . $WHRE_CLAUS . ";";
 if ($result = $mysqli_login->query($query)) {
 	if ($result->num_rows > 0) {
 		$obj = $result->fetch_object();
-		if (strcmp($_POST["role"], "teacher") == 0) {
-			$TEACHER_ID = $obj->login_id;
-			$TEACHER_NAME = $obj->name;
-			$_SESSION['teacher_id'] = $TEACHER_ID;
-			$_SESSION['loginname'] = $TEACHER_NAME;
+		if ($obj->role == 2) {
+			$_SESSION['teacher_id'] = $obj->login_id
+			$_SESSION['loginname'] = $obj->name;
 			include "teacher.php";
-		} else {
-			$PARENT_ID = $obj->login_id;
-			$PARENT_NAME = $obj->name;
-			$_SESSION['parent_id'] = $PARENT_ID;
-			$_SESSION['loginname'] = $PARENT_NAME;
+		} else if ($obj->role == 1)i {
+			$_SESSION['parent_id'] = $obj->login_id
+			$_SESSION['loginname'] = $obj->name;
 			include "parent.php";
+		} else {
+			printf("您输入的用户名或密码错误，请重新输入\n");
+			sleep(1);
+			include "index.php";
 		}
+
 	} else {
 		printf("您输入的用户名或密码错误，请重新输入\n");
 		sleep(1);
