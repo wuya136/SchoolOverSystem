@@ -1,5 +1,6 @@
 <?php
-session_start();
+if (!isset($_SESSION))
+	session_start();
 
 $url = "http://localhost/SchoolOverSystem/teacher.php";
 header("location:$url");
