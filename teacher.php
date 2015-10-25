@@ -265,8 +265,25 @@ printf("%s\n", $htmlcode);
 		<legend>
 			家长的回复
 		</legend>
-		<form name="parent_reply" action="reply.php" method="post">
+		<form name="parent_reply" action="teacher.php" method="post">
 			<textarea rows="15" cols="80">所有家长的回复</textarea>
+<?php
+$query = "select author_id, content, createtime from message where type='2' and receiver_id='" . $_SESSION['teacher_id'] . "' and createtime>'" . $start_time . "' and createtime<'" . $end_time . "';" ;
+if ($result = $mysqli_teacher->query($query)) {
+	while ($obj = $result->fetch_object()) {
+		$PARENT_ID = $obj->receiver_id;
+		$message = $obj->content;
+		$createtime = $obj->createtime;
+
+		$query2 = "select name from student where parent_id='" . $PARENT_ID . "';";
+		$result2 = $mysqli_teacher->query($query2);
+		if ($obj2 = $result2->fetch_object())
+			$STUDENT_NAME = $obj2->name;
+
+		$htmlcode .= $STUDENT_NAME . "家长对我说 " . $createtime . ":\n" . $message . "\n";
+	}
+}
+?>
 			<input type="submit" value="更新"/>
 		</form>
 	</fieldset>
