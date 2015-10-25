@@ -24,6 +24,7 @@ if (is_array($STUDENT_GOHOME)) {
 	foreach($STUDENT_GOHOME as $value) {
 		$update .= "update schoolover set status='2' where student_id="; 
 		$update .= "$value" . ";";
+	}
 }
 
 /*
