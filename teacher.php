@@ -191,7 +191,7 @@ if ($result = $mysqli_teacher->query($query)) {
 	while ($obj = $result->fetch_object()) {
 		$message = $obj->content;
 		$createtime = $obj->createtime;
-		$htmlcode .= "我" . " " . $createtime . ":</br>" . $message . "</br>";
+		$htmlcode .= "我" . " " . $createtime . ":\n" . $message . "\n";
 	}
 }
 $htmlcode .= "</textarea>";
