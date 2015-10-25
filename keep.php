@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+/*
+ * Jump to teacher page
+ */
+$url = "http://localhost/SchoolOverSystem/teacher.php";
+header("location:$url");
 
 /*
  * Connect the database
@@ -27,4 +34,5 @@ if ($mysqli_keep->query($update))
 else
 	printf("%s failed to execute\n" ,$update);
 
+$mysqli_keep->commit();
 ?>
